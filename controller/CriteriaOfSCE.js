@@ -15,8 +15,6 @@ const getAllEmployees=async (request, response) => {
 }
 
 
-// Get Employee by ID 
-
 // Add New Employee 
 
 const addMultipleCriteria = async (req, res) => {
