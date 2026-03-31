@@ -13,8 +13,6 @@ const getAllConstructionMethods=async (request, response) => {
         response.status(400).json({error:`Invalid request data ${err}`})       
     }
 }
-
-
 // Get Employee by ID 
 
 // Add New Employee 

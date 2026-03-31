@@ -47,14 +47,6 @@ const addMultipleCriteria = async (req, res) => {
         const name = sub.name;
         const value = Number(sub.value);
 
-        if (!name || typeof name !== "string") {
-          throw new Error(`Invalid subCriteria name in ${mainCriteria}`);
-        }
-
-        if (isNaN(value) || value < 1 || value > 9) {
-          throw new Error(`Value must be 1–9 in ${mainCriteria}`);
-        }
-
         return {
           name,
           value: Number(value.toFixed(3)) // 3 decimal precision
