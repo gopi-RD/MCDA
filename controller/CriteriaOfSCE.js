@@ -68,7 +68,7 @@ const addMultipleCriteria = async (req, res) => {
     });
 
     // 💾 Insert all at once
-    const savedData = await Criteria.insertMany(formattedData);
+    const savedData = await modelCriteria.insertMany(formattedData);
 
     res.status(201).json({
       message: "All 15 criteria saved successfully",
