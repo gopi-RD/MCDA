@@ -12,8 +12,7 @@ const subSchema = new mongoose.Schema({
 const criteriaSchema = new mongoose.Schema({
   mainCriteria: {
     type: String,
-    required: true,   // ⚠️ fix typo (require → required)
-    unique: true
+    required: true,   // ⚠️ fix typo (require → require
   },
   subCriteria: {
     type: [subSchema],

@@ -13,7 +13,6 @@ const constructionSchema = new mongoose.Schema({
   mainCriteria: {
     type: String,
     required: true,   // ⚠️ fix typo (require → required)
-    unique: true
   },
   subCriteriaScore: {
     type: [subSchema],
