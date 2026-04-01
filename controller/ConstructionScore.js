@@ -18,22 +18,58 @@ const getAllConstructionMethods=async (request, response) => {
 // Add New Employee 
 
 const addConstructionScore=async (request, response) => {
-    try{
-       const { mainCriteria, subCriteriaScore } = request.body;
+    try {
+    const { data } = req.body;
 
-        const newEmployee = new modelConstruction({
-            mainCriteria,
-            subCriteriaScore
-        });
-
-            
-        
-        await newEmployee.save()
-        response.status(201).json({message:`Successfully created Sub Criteria`})
-
-    }catch(err){
-        response.status(400).json({error:`Invalid request data ${err}`})       
+    // 🔍 Validate total objects
+    if (!Array.isArray(data) || data.length !== 5) {
+      return res.status(400).json({
+        error: "Exactly 5 objects required"
+      });
     }
+
+    const formattedData = data.map((item, index) => {
+      const { mainCriteria, subCriteria } = item;
+
+      // 🔍 Validate mainCriteria
+      if (!mainCriteria || typeof mainCriteria !== "string") {
+        throw new Error(`Invalid mainCriteria at index ${index}`);
+      }
+
+      // 🔍 Validate subCriteria
+      if (!Array.isArray(subCriteria) || subCriteria.length !== 15) {
+        throw new Error(`Each object must have 15 subCriteria (index ${index})`);
+      }
+
+      const formattedSub = subCriteria.map(sub => {
+        const name = sub.name;
+        const value = Number(sub.value);
+
+        return {
+          name,
+          value: Number(value.toFixed(3)) // 3 decimal precision
+        };
+      });
+
+      return {
+        mainCriteria,
+        subCriteria: formattedSub
+      };
+    });
+
+    // 💾 Insert all at once
+    const savedData = await modelConstruction.insertMany(formattedData);
+
+    res.status(201).json({
+      message: "All 5 Construction Method Scores saved successfully",
+      data: savedData
+    });
+
+  } catch (err) {
+    res.status(400).json({
+      error: err.message
+    });
+  }
 }
 
 
