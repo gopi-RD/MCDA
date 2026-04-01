@@ -29,7 +29,7 @@ const addConstructionScore=async (req, res) => {
     }
 
     const formattedData = data.map((item, index) => {
-      const { mainCriteria, subCriteria } = item;
+      const { mainCriteria, subCriteriaScore } = item;
 
       // 🔍 Validate mainCriteria
       if (!mainCriteria || typeof mainCriteria !== "string") {
@@ -37,11 +37,11 @@ const addConstructionScore=async (req, res) => {
       }
 
       // 🔍 Validate subCriteria
-      if (!Array.isArray(subCriteria) || subCriteria.length !== 15) {
+      if (!Array.isArray(subCriteriaScore) || subCriteriaScore.length !== 15) {
         throw new Error(`Each object must have 15 subCriteria (index ${index})`);
       }
 
-      const formattedSub = subCriteria.map(sub => {
+      const formattedSub = subCriteriaScore.map(sub => {
         const name = sub.name;
         const value = Number(sub.value);
 
@@ -53,7 +53,7 @@ const addConstructionScore=async (req, res) => {
 
       return {
         mainCriteria,
-        subCriteria: formattedSub
+        subCriteriaScore: formattedSub
       };
     });
 
