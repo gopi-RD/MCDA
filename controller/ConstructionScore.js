@@ -17,7 +17,7 @@ const getAllConstructionMethods=async (request, response) => {
 
 // Add New Employee 
 
-const addConstructionScore=async (request, response) => {
+const addConstructionScore=async (req, res) => {
     try {
     const { data } = req.body;
 
@@ -71,6 +71,5 @@ const addConstructionScore=async (request, response) => {
     });
   }
 }
-
 
 module.exports={getAllConstructionMethods,addConstructionScore}
