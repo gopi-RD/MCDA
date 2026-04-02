@@ -10,9 +10,10 @@ const subSchema = new mongoose.Schema({
   }
 });
 const constructionSchema = new mongoose.Schema({
-  mainCriteria: {
+  constructionMethod: {
     type: String,
-    required: true,   // ⚠️ fix typo (require → required)
+    required:true,
+      
   },
   subCriteriaScore: {
     type: [subSchema],
@@ -26,5 +27,5 @@ const constructionSchema = new mongoose.Schema({
 
 
 
-const User = mongoose.model('ConstructionScore', constructionSchema);
-module.exports = User;
+const method = mongoose.model('ConstructionScore', constructionSchema);
+module.exports = method;
